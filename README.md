@@ -2,6 +2,8 @@
 
 Developer Factory is an AI-centered development operations tool designed to manage development requests on a board while keeping the actual target repositories isolated under `workspace/`. Its goal is to bring task creation, requirement shaping, execution approval, review, history tracking, document storage, and analytics into a single workflow.
 
+https://www.youtube.com/watch?v=lA-6jflRFNU
+
 ## Purpose
 
 - Manage development requests in one board instead of scattering them across different channels.
