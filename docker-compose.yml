@@ -1,0 +1,95 @@
+services:
+  dev-automation-board:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dev-automation-board:latest
+    container_name: dev-automation-board
+    
+    # Ports
+    ports:
+      - "3001:3000"    # Dev Automation Board (avoiding conflict with port 3000)
+      - "3101:3100"    # Code Editor
+    
+    # Volume mounts
+    volumes:
+      # Essential: Workspace for external projects (mounted to host)
+      # Each project cloned here will have access to Claude Code skills
+      - ./workspace:/app/workspace
+      
+      # Essential: Database persistence
+      - ./data:/app/data
+      
+      # Essential: Implementation reports
+      - ./reports:/app/reports
+      
+      # Essential: Server logs with daily rotation (persisted on host)
+      - ./logs:/app/logs
+      
+      # Optional: SSH keys for private repos (read-only)
+      - ~/.ssh:/home/nodejs/.ssh:ro
+      
+      # Optional: Git configuration
+      - ~/.gitconfig:/home/nodejs/.gitconfig:ro
+      
+      # Optional: Theia user settings persistence
+      - theia-user-data:/home/nodejs/.theia
+      
+      # Optional: Override .claude directory from host (for development)
+      # Uncomment to use host's local .claude directory instead of the container copy
+      # - ./.claude:/app/.claude:ro
+    
+    # Environment variables
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - THEIA_PORT=3100
+      - DOCKER_ENV=true
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GIT_USER_NAME=${GIT_USER_NAME:-Developer Factory}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL:-automation@localhost}
+      - HOST_WORKSPACE_PATH=${PWD}/workspace
+      - HOST_LOGS_PATH=${PWD}/logs
+      - CLAUDE_CLI_PATH=/usr/local/bin/claude
+      - SKILLS_DIRECTORY=/app/.claude/skills
+      - DB_ID=${DB_ID}
+      - DB_PW=${DB_PW}
+    
+    # Load from .env file
+    env_file:
+      - .env
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Resource limits (adjust based on your system)
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '2'
+          memory: 2G
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Networks
+    networks:
+      - dev-automation-network
+
+# Named volumes
+volumes:
+  theia-user-data:
+    driver: local
+
+# Networks
+networks:
+  dev-automation-network:
+    driver: bridge
+

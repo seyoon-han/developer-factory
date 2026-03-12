@@ -1,0 +1,58 @@
+{
+  "name": "dev-automation-theia-ide",
+  "version": "1.0.0",
+  "description": "Theia IDE for Dev Automation Board",
+  "main": "src-gen/backend/main.js",
+  "scripts": {
+    "prepare": "theia build --mode development",
+    "build": "theia build --mode production",
+    "start": "theia start --hostname=0.0.0.0 --port=3100",
+    "watch": "theia build --watch --mode development",
+    "clean": "theia clean"
+  },
+  "theia": {
+    "target": "browser",
+    "frontend": {
+      "config": {
+        "applicationName": "Dev Automation IDE",
+        "defaultTheme": "dark",
+        "defaultIconTheme": "vs-seti",
+        "preferences": {
+          "files.autoSave": "afterDelay",
+          "editor.fontSize": 14,
+          "editor.tabSize": 2,
+          "workbench.colorTheme": "Dark+ (default dark)"
+        }
+      }
+    },
+    "backend": {
+      "config": {
+        "startupTimeout": 30000,
+        "resolveSystemPlugins": false
+      }
+    }
+  },
+  "dependencies": {
+    "@theia/core": "^1.55.0",
+    "@theia/editor": "^1.55.0",
+    "@theia/filesystem": "^1.55.0",
+    "@theia/git": "^1.55.0",
+    "@theia/markers": "^1.55.0",
+    "@theia/messages": "^1.55.0",
+    "@theia/monaco": "^1.55.0",
+    "@theia/navigator": "^1.55.0",
+    "@theia/outline-view": "^1.55.0",
+    "@theia/preferences": "^1.55.0",
+    "@theia/terminal": "^1.55.0",
+    "@theia/workspace": "^1.55.0",
+    "@theia/search-in-workspace": "^1.55.0",
+    "@theia/file-search": "^1.55.0"
+  },
+  "devDependencies": {
+    "@theia/cli": "^1.55.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+

@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Lucky Logic Dark Theme (Default) */
+    --background: 0 0% 4%; /* #0a0a0a */
+    --foreground: 135 100% 50%; /* #00ff41 - Bright Lime */
+
+    --card: 0 0% 7%; /* #111111 */
+    --card-foreground: 135 100% 50%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 135 100% 50%;
+
+    --primary: 135 100% 50%; /* #00ff41 */
+    --primary-foreground: 0 0% 4%; /* Black text on lime */
+
+    --secondary: 0 0% 10%; /* #1a1a1a */
+    --secondary-foreground: 135 100% 50%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 139 100% 23%; /* #007722 */
+
+    --accent: 24 100% 50%; /* #ff6600 - Orange */
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 100% 60%; /* #ff3333 - Red */
+    --destructive-foreground: 0 0% 4%;
+
+    --border: 135 100% 50% / 0.2; /* #00ff4133 */
+    --input: 135 100% 50% / 0.2;
+    --ring: 135 100% 50%;
+
+    --radius: 3px;
+
+    /* Charts (Mapped to Lucky Logic Palette) */
+    --chart-1: 135 100% 50%; /* Lime */
+    --chart-2: 24 100% 50%; /* Orange */
+    --chart-3: 325 100% 74%; /* Magenta */
+    --chart-4: 48 100% 50%; /* Yellow */
+    --chart-5: 0 100% 60%; /* Red */
+
+    /* Lucky Logic Specifics */
+    --text-primary: #00ff41;
+    --text-secondary: #00cc33;
+    --text-dim: #007722;
+    --glow: 0 0 10px rgba(0, 255, 65, 0.33);
+    --glow-strong: 0 0 20px #00ff41;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 135 100% 50%;
+    --sidebar-primary: 135 100% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 135 100% 50%;
+    --sidebar-border: 135 100% 50% / 0.2;
+    --sidebar-ring: 135 100% 50%;
+  }
+
+  .dark {
+    /* Same as root to enforce theme */
+    --background: 0 0% 4%;
+    --foreground: 135 100% 50%;
+    --card: 0 0% 7%;
+    --card-foreground: 135 100% 50%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 135 100% 50%;
+    --primary: 135 100% 50%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 135 100% 50%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 139 100% 23%;
+    --accent: 24 100% 50%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 4%;
+    --border: 135 100% 50% / 0.2;
+    --input: 135 100% 50% / 0.2;
+    --ring: 135 100% 50%;
+    
+    --chart-1: 135 100% 50%;
+    --chart-2: 24 100% 50%;
+    --chart-3: 325 100% 74%;
+    --chart-4: 48 100% 50%;
+    --chart-5: 0 100% 60%;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 135 100% 50%;
+    --sidebar-primary: 135 100% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 135 100% 50%;
+    --sidebar-border: 135 100% 50% / 0.2;
+    --sidebar-ring: 135 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply font-mono text-[11px] px-4 py-2 bg-transparent border border-border text-foreground cursor-pointer rounded-[3px] transition-all duration-200;
+  }
+  .btn:hover {
+    @apply bg-primary text-primary-foreground shadow-[0_0_10px_rgba(0,255,65,0.33)];
+  }
+  .btn-small {
+    @apply px-2.5 py-1 text-[10px];
+  }
+  .btn-primary {
+    @apply border-primary;
+  }
+  .btn-danger {
+    @apply border-destructive text-destructive;
+  }
+  .btn-danger:hover {
+    @apply bg-destructive text-destructive-foreground;
+  }
+
+  /* Form Inputs */
+  .input-field {
+    @apply font-mono text-[11px] px-2.5 py-1.5 bg-card border border-border text-foreground rounded-[3px] outline-none transition-all duration-200;
+  }
+  .input-field:focus {
+    @apply border-primary shadow-[0_0_10px_rgba(0,255,65,0.33)];
+  }
+  .input-field::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  /* Panels */
+  .panel {
+    @apply bg-card border border-border rounded-[3px] overflow-hidden;
+  }
+  .panel-header {
+    @apply bg-secondary px-4 py-3 border-b border-border font-semibold text-[12px] flex justify-between items-center;
+  }
+  .panel-content {
+    @apply p-4;
+  }
+
+  /* Status Indicators */
+  .status-dot {
+    @apply w-2 h-2 rounded-full inline-block;
+  }
+  .status-dot.running {
+    @apply bg-primary animate-pulse;
+  }
+  .status-dot.stopped {
+    @apply bg-destructive;
+  }
+  .status-dot.pending {
+    @apply bg-accent animate-pulse;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+}
+
+/* Agentic Workflow Animations */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.2s ease-out forwards;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}

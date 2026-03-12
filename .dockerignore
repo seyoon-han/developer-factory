@@ -1,0 +1,79 @@
+# Node modules
+node_modules
+theia-ide/node_modules
+theia-ide/src-gen
+
+# Next.js
+.next
+.turbo
+out
+
+# Build outputs
+dist
+build
+# NOTE: Don't ignore lib/ - it contains our source code!
+
+# Development files
+.git
+.gitignore
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Testing
+coverage
+.nyc_output
+
+# Workspace (will be mounted)
+workspace/*
+!workspace/.gitignore
+!workspace/README.md
+
+# Data (will be mounted)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/documents/*
+
+# Reports (will be mounted)
+reports/*.md
+
+# Documentation (not needed in runtime)
+docs/*.md
+*.md
+!theia-ide/package.json
+
+# Docker files (not needed in image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Misc
+.husky
+.editorconfig
+.prettierrc
+.eslintrc
+jest.config.js
+
